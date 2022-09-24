@@ -14,17 +14,17 @@ public class BoardController {
         this.boardService=boardService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/list")
     public String list(){
         return "board/list.html";
     }
 
-    @GetMapping("/post")
+    @GetMapping("/post_")
     public String write(){
         return "board/write.html";
     }
 
-    @PostMapping("/post")
+    @PostMapping("/post_")
     public String write(BoardDto boardDto){
         boardService.savePost(boardDto);
         return "redirect:/";
