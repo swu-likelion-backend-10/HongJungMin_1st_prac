@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>회원정보 수정 페이지</title>
+</head>
+<body>
+<form th:action="@{'/post/edit/'+ ${personalDetailDto.id}}" th:method="put">
+    <!--  타임리프일때만 put이고, 일반 method는 post/get밖에 없음 -->
+    제목 : <input type="text" name="name" th:value="${personalDetailDto.name}"> <br>
+    나이 : <input type="text" name="age" th:value="${personalDetailDto.age}"> <br>
+    전공 : <input type="text" name="major" th:value="${personalDetailDto.major}"> <br>
+    내용<br>
+    <textarea name="introduction">[[${personalDetailDto.introduction}]]</textarea><br>
+    <input type="submit" value="수정">
+</form>
+
+</body>
+</html>

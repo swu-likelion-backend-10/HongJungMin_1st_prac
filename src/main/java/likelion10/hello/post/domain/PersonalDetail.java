@@ -1,5 +1,6 @@
 package likelion10.hello.post.domain;
 
+import likelion10.hello.post.dto.PersonalDetailDto;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Entity
-public class PersonalDetail {
+public class PersonalDetail extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,6 +35,14 @@ public class PersonalDetail {
         this.age=age;
         this.major=major;
         this.introduction=introduction;
+    }
+
+    public void update(PersonalDetailDto personalDetailDto){
+        this.name = personalDetailDto.getName();
+        this.age = personalDetailDto.getAge();
+        this.major = personalDetailDto.getMajor();
+        this.introduction = personalDetailDto.getIntroduction();
+
     }
 
 }

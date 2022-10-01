@@ -2,8 +2,11 @@ package likelion10.hello.post.dto;
 
 import likelion10.hello.post.domain.Board;
 import lombok.Builder;
+import lombok.Getter;
+
 import java.time.LocalDateTime;
 
+@Getter
 public class BoardDto {
 
     private Long id;
