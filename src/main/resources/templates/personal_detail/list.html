@@ -7,6 +7,15 @@
 <body>
 <div>
       <h1>등록된 인적사항이 보입니다.</h1>
+
+    <form action="/search" method="GET">
+        <div>
+            <input name="keyword" type="text" placeholder="search">
+            <button>search</button>
+        </div>
+    </form>
+    </a>
+  <br>
       <a th:href="@{/post}">인적사항 등록</a>
       <table>
         <thead>
@@ -41,5 +50,7 @@
         </tbody>
       </table>
     </div>
+
+
 </body>
 </html>

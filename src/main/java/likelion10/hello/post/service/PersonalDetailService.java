@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PersonalDetailService {
@@ -73,4 +74,32 @@ public class PersonalDetailService {
     public void deletePost(Long id) {
         personalDetailRepository.deleteById(id);
     }
-}
+    @Transactional
+    public List<PersonalDetailDto> searchPosts(String keyword){
+        List<PersonalDetail> personalDetails = personalDetailRepository.findByNameContaining(keyword);
+        List<PersonalDetailDto> personalDetailDtoList = new ArrayList<>();
+
+        if(personalDetails.isEmpty()) {
+            return personalDetailDtoList;
+        }
+
+        for (PersonalDetail personalDetail : personalDetails){
+            personalDetailDtoList.add(this.convertEntityToDto(personalDetail));
+        }
+
+        return personalDetailDtoList;
+    }
+
+    private PersonalDetailDto convertEntityToDto(PersonalDetail personalDetail){
+        return PersonalDetailDto.builder()
+                .id(personalDetail.getId())
+                .name(personalDetail.getName())
+                .age(personalDetail.getAge())
+                .major(personalDetail.getMajor())
+                .introduction(personalDetail.getIntroduction())
+                .createdTime(personalDetail.getCreatedTime())
+                .modifiedTime(personalDetail.getModifiedTime())
+                .build();
+    }
+
+    }

@@ -62,5 +62,12 @@ public class PersonalDetailController {
         personalDetailService.deletePost(id);
         return "redirect:/";
     }
+    @GetMapping("/search")
+    public String search(@RequestParam(value = "keyword") String keyword, Model model) {
+        List<PersonalDetailDto> personalDetailDtoList = personalDetailService.searchPosts(keyword);
+        model.addAttribute("personalDetailList", personalDetailDtoList);
+
+        return "personal_detail/list.html";
+    }
 }
 
