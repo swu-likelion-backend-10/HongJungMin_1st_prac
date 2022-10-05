@@ -19,25 +19,25 @@ public class PersonalDetailController {
         this.personalDetailService=personalDetailService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/personal_detail/")
     public String list(Model model){
         List<PersonalDetailDto> personalDetailDtoList = personalDetailService.getPersonalDetaillist();
         model.addAttribute("personalDetailList", personalDetailDtoList);
 
         return "personal_detail/list.html";
     }
-    @GetMapping("/post")
+    @GetMapping("/personal_detail/post")
     public String write(){
         return "personal_detail/write.html";
     }
 
-    @PostMapping("/post")
+    @PostMapping("/personal_detail/post")
     public String write(PersonalDetailDto PersonalDetailDto){
         personalDetailService.savePost(PersonalDetailDto);
-        return "redirect:/";
+        return "redirect:/personal_detail/";
     }
 
-    @GetMapping("/post/{no}")
+    @GetMapping("/personal_detail/post/{no}")
     public String detail(@PathVariable("no") Long id, Model model) {
         PersonalDetailDto personalDetailDto = personalDetailService.getPost(id);
 
@@ -45,24 +45,24 @@ public class PersonalDetailController {
         return "personal_detail/detail.html";
     }
 
-    @GetMapping("/post/edit/{no}")
+    @GetMapping("/personal_detail/post/edit/{no}")
     public String edit(@PathVariable("no") Long id, Model model) {
         PersonalDetailDto personalDetailDto = personalDetailService.getPost(id);
 
         model.addAttribute("personalDetailDto", personalDetailDto);
         return "personal_detail/update.html";
     }
-    @PutMapping("post/edit/{no}")
+    @PutMapping("/personal_detail/post/edit/{no}")
     public String update(@PathVariable("no") Long id, PersonalDetailDto personalDetailDto) {
         personalDetailService.updatePost(id, personalDetailDto);
-        return "redirect:/post/{no}";
+        return "redirect:/personal_detail/post/{no}";
     }
-    @DeleteMapping("/post/delete/{no}")
+    @DeleteMapping("/personal_detail/post/delete/{no}")
     public String delete(@PathVariable("no") Long id ){
         personalDetailService.deletePost(id);
-        return "redirect:/";
+        return "redirect:/personal_detail/";
     }
-    @GetMapping("/search")
+    @GetMapping("/personal_detail/search")
     public String search(@RequestParam(value = "keyword") String keyword, Model model) {
         List<PersonalDetailDto> personalDetailDtoList = personalDetailService.searchPosts(keyword);
         model.addAttribute("personalDetailList", personalDetailDtoList);

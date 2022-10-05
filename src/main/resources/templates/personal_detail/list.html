@@ -8,7 +8,7 @@
 <div>
       <h1>등록된 인적사항이 보입니다.</h1>
 
-    <form action="/search" method="GET">
+    <form action="/personal_detail/search" method="GET">
         <div>
             <input name="keyword" type="text" placeholder="search">
             <button>search</button>
@@ -16,7 +16,8 @@
     </form>
     </a>
   <br>
-      <a th:href="@{/post}">인적사항 등록</a>
+      <a th:href="@{/personal_detail/post}">인적사항 등록</a>
+      <a th:href="@{/}">글 목록</a>
       <table>
         <thead>
         <tr>
@@ -33,7 +34,7 @@
             <span th:text="${personalDetail.id}"></span>
           </td>
           <td>
-            <a th:href="@{'/post/' + ${personalDetail.id}}">
+            <a th:href="@{'/personal_detail/post/' + ${personalDetail.id}}">
               <span th:text="${personalDetail.name}"></span>
             </a>
           </td>

@@ -13,10 +13,10 @@
 <p th:text="${personalDetailDto.major}"></p>
 <p th:text="${personalDetailDto.introduction}"></p>
 
-<a th:href="@{'/post/edit/' + ${personalDetailDto.id}}">
+<a th:href="@{'/personal_detail/post/edit/' + ${personalDetailDto.id}}">
     <button> 수정 </button>
 </a>
-<form th:action="@{'/post/delete/' + ${personalDetailDto.id}}" th:method="delete">
+<form th:action="@{'/personal_detail/post/delete/' + ${personalDetailDto.id}}" th:method="delete">
     <button type="submit"> 삭제 </button>
 </form>
 

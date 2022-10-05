@@ -1,5 +1,6 @@
 package likelion10.hello.post.controller;
 
+import likelion10.hello.post.domain.Board;
 import likelion10.hello.post.dto.BoardDto;
 import likelion10.hello.post.dto.PersonalDetailDto;
 import likelion10.hello.post.service.BoardService;
@@ -20,7 +21,7 @@ public class BoardController {
         this.personalDetailService=personalDetailService;
     }
 
-    @GetMapping("/board")
+    @GetMapping("/")
     public String list(Model model){
         List<BoardDto> boardDtoList = boardService.getBoardlist();
         model.addAttribute("boardList", boardDtoList);
@@ -31,39 +32,46 @@ public class BoardController {
         return "board/list.html";
     }
 
-    @GetMapping("board/post")
+    @GetMapping("/post")
     public String write(){
         return "board/write.html";
     }
 
-    @PostMapping("board/post")
+    @PostMapping("/post")
     public String write(BoardDto boardDto){
         boardService.savePost(boardDto);
         return "redirect:/";
     }
 
-    @GetMapping("board/post/{no}")
+    @GetMapping("/post/{no}")
     public String detail(@PathVariable("no") Long id, Model model) {
         BoardDto boardDto = boardService.getPost(id);
-
         model.addAttribute("boardDto", boardDto);
         return "board/detail.html";
     }
 
-    @GetMapping("board/post/edit/{no}")
+    @GetMapping("/post/edit/{no}")
     public String edit(@PathVariable("no") Long id, Model model) {
         BoardDto boardDto = boardService.getPost(id);
         model.addAttribute("boardDto", boardDto);
         return "/board/update.html";
     }
-    @PutMapping("board/post/edit/{no}")
+    @PutMapping("/post/edit/{no}")
     public String update(@PathVariable("no") Long id, BoardDto boardDto) {
         boardService.updatePost(id, boardDto);
         return "redirect:/post/{no}";
     }
-    @DeleteMapping("board/post/delete/{no}")
+    @DeleteMapping("/post/delete/{no}")
     public String delete(@PathVariable("no") Long id ){
         boardService.deletePost(id);
         return "redirect:/";
+    }
+
+    @GetMapping("/search")
+    public String search(@RequestParam(value = "keyword") String keyword, Model model) {
+        List<BoardDto> boardDtoList = boardService.searchPosts(keyword);
+        model.addAttribute("boardList", boardDtoList);
+
+        return "board/list.html";
     }
 }
